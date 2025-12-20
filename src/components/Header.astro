@@ -19,11 +19,11 @@ const currentPath = Astro.url.pathname;
     </button>
 
     <nav class="header__nav" id="mainNav">
-      <a href="/" class={currentPath === '/' ? 'active' : ''}>Inicio</a>
-      <a href="/team" class={currentPath.startsWith('/team') ? 'active' : ''}>Equipo</a>
-      <a href="/services" class={currentPath.startsWith('/services') ? 'active' : ''}>Servicios</a>
-      <a href="/blog" class={currentPath.startsWith('/blog') ? 'active' : ''}>Blog</a>
-      <a href="/contact" class={currentPath === '/contact' ? 'active' : ''}>Contacto</a>
+      <a data-astro-prefetch href="/" class={currentPath === '/' ? 'active' : ''}>Inicio</a>
+      <a data-astro-prefetch href="/team" class={currentPath.startsWith('/team') ? 'active' : ''}>Equipo</a>
+      <a data-astro-prefetch href="/services" class={currentPath.startsWith('/services') ? 'active' : ''}>Servicios</a>
+      <a data-astro-prefetch href="/blog" class={currentPath.startsWith('/blog') ? 'active' : ''}>Blog</a>
+      <a data-astro-prefetch href="/contact" class={currentPath === '/contact' ? 'active' : ''}>Contacto</a>
     </nav>
 
     <div class="header__social">

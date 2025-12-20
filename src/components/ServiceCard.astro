@@ -9,7 +9,7 @@ const { service } = Astro.props;
 ---
 
 <article class="service-card">
-  <a href={`/services/${service.id}`} class="service-card__link">
+  <a href={`/services/${service.id}`} class="service-card__link" data-astro-prefetch>
     <div class="service-card__image" transition:name={`service-image-${service.id}`}>
       <img src={service.image} alt={service.title} />
       <div class="service-card__overlay">
