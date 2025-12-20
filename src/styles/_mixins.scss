@@ -1,0 +1,122 @@
+@import './variables';
+
+// Responsive Mixins (Mobile First)
+@mixin sm {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (min-width: $breakpoint-2xl) {
+    @content;
+  }
+}
+
+// Container
+@mixin container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 $spacing-sm;
+
+  @include sm {
+    padding: 0 $spacing-md;
+  }
+
+  @include md {
+    padding: 0 $spacing-lg;
+  }
+
+  @include lg {
+    max-width: $breakpoint-lg;
+  }
+
+  @include xl {
+    max-width: $breakpoint-xl;
+  }
+}
+
+// Flexbox utilities
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Typography
+@mixin heading {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+  color: $primary-dark;
+}
+
+@mixin body-text {
+  font-family: $font-secondary;
+  font-weight: $font-weight-regular;
+  line-height: 1.6;
+  color: $gray-dark;
+}
+
+// Animations
+@mixin fade-in {
+  animation: fadeIn $transition-base forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Hover effects
+@mixin hover-lift {
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+@mixin hover-gold {
+  transition: color $transition-base;
+
+  &:hover {
+    color: $secondary-gold;
+  }
+}

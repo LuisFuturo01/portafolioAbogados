@@ -1,14 +1,20 @@
 {
-  "name": "portfolioabogados",
+  "name": "shaffer-laws",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^5.16.6"
+    "astro": "^5.16.6",
+    "@astrojs/sitemap": "^3.0.0"
+  },
+  "devDependencies": {
+    "sass": "^1.69.5",
+    "@astrojs/check": "^0.3.1",
+    "typescript": "^5.3.3"
   }
 }

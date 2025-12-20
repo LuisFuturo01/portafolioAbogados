@@ -1,0 +1,300 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { team } from '@data/team';
+
+const sortedTeam = team.sort((a, b) => a.order - b.order);
+---
+
+<BaseLayout title="Nuestro Equipo" description="Conozca a nuestro equipo de abogados expertos especializados en diferentes áreas del derecho.">
+  <section class="page-hero">
+    <div class="container">
+      <h1>Nuestro Equipo</h1>
+      <p>Abogados expertos comprometidos con la excelencia legal</p>
+    </div>
+  </section>
+
+  <section class="team-intro section">
+    <div class="container">
+      <div class="intro-content">
+        <p>
+          En Shaffer Laws, contamos con un equipo de abogados altamente calificados y especializados en diversas áreas del derecho. 
+          Nuestros profesionales combinan décadas de experiencia con un compromiso inquebrantable hacia el éxito de nuestros clientes.
+        </p>
+        <p>
+          Cada miembro de nuestro equipo aporta una perspectiva única y conocimientos profundos en su área de especialización, 
+          permitiéndonos ofrecer soluciones legales integrales y personalizadas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-grid-section section">
+    <div class="container">
+      <div class="team-grid">
+        {sortedTeam.map((member) => (
+          <article class="team-member-card">
+            <a href={`/team/${member.id}`} class="team-member-card__link">
+              <div class="team-member-card__image" transition:name={`team-image-${member.id}`}>
+                <img src={member.image} alt={member.name} />
+                <div class="team-member-card__overlay">
+                  <span class="view-profile">Ver Perfil →</span>
+                </div>
+              </div>
+              <div class="team-member-card__content">
+                <h3>{member.name}</h3>
+                <p class="position">{member.position}</p>
+                <p class="specialty">{member.specialty}</p>
+                <div class="team-member-card__stats">
+                  <div class="stat">
+                    <span class="stat__value">{member.experience.length}+</span>
+                    <span class="stat__label">Años Experiencia</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat__value">{member.achievements.length}</span>
+                    <span class="stat__label">Reconocimientos</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="team-cta section bg-cream">
+    <div class="container">
+      <div class="cta-box">
+        <h2>¿Quiere trabajar con nosotros?</h2>
+        <p>Póngase en contacto con nuestro equipo para discutir su caso</p>
+        <a href="/contact" class="btn btn--primary btn--large">Consulta Gratuita</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  @import '../../styles/variables';
+  @import '../../styles/mixins';
+  .page-hero {
+    background: linear-gradient(135deg, $primary-dark 0%, $primary-navy 100%);
+    color: $white;
+    padding: $spacing-3xl 0 $spacing-2xl;
+    text-align: center;
+
+    h1 {
+      color: $white;
+      font-size: $font-size-3xl;
+      margin-bottom: $spacing-md;
+
+      @include md {
+        font-size: $font-size-4xl;
+      }
+    }
+
+    p {
+      font-size: $font-size-lg;
+      color: rgba($white, 0.9);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+
+  .team-intro {
+    .intro-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+
+      p {
+        font-size: $font-size-lg;
+        line-height: 1.8;
+        color: $gray-dark;
+        margin-bottom: $spacing-lg;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+
+    @include sm {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include lg {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .team-member-card {
+    background: $white;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-base;
+    transition: all $transition-base;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: $shadow-xl;
+    }
+
+    &__link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    &__image {
+      position: relative;
+      height: 350px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform $transition-slow;
+      }
+
+      &:hover img {
+        transform: scale(1.1);
+      }
+    }
+
+    &__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba($primary-dark, 0.3) 50%,
+        rgba($primary-dark, 0.95) 100%
+      );
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: $spacing-lg;
+      opacity: 0;
+      transition: opacity $transition-base;
+
+      .view-profile {
+        color: $secondary-gold;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-lg;
+      }
+    }
+
+    &:hover &__overlay {
+      opacity: 1;
+    }
+
+    &__content {
+      padding: $spacing-lg;
+
+      h3 {
+        font-size: $font-size-2xl;
+        color: $primary-dark;
+        margin-bottom: $spacing-xs;
+      }
+
+      .position {
+        color: $secondary-gold;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-base;
+        margin-bottom: $spacing-xs;
+      }
+
+      .specialty {
+        color: $gray-medium;
+        font-size: $font-size-sm;
+        margin-bottom: $spacing-md;
+      }
+    }
+
+    &__stats {
+      display: flex;
+      gap: $spacing-lg;
+      padding-top: $spacing-md;
+      border-top: 1px solid $gray-light;
+
+      .stat {
+        flex: 1;
+        text-align: center;
+
+        &__value {
+          display: block;
+          font-size: $font-size-2xl;
+          font-weight: $font-weight-bold;
+          color: $secondary-gold;
+          line-height: 1;
+          margin-bottom: $spacing-xs;
+        }
+
+        &__label {
+          display: block;
+          font-size: $font-size-xs;
+          color: $gray-medium;
+        }
+      }
+    }
+  }
+
+  .cta-box {
+    text-align: center;
+    background: $white;
+    padding: $spacing-3xl $spacing-xl;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-lg;
+
+    h2 {
+      color: $primary-dark;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      font-size: $font-size-lg;
+      color: $gray-medium;
+      margin-bottom: $spacing-xl;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .btn {
+    display: inline-block;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $radius-base;
+    font-weight: $font-weight-semibold;
+    text-align: center;
+    transition: all $transition-base;
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+
+    &--primary {
+      background: $secondary-gold;
+      color: $primary-dark;
+      border-color: $secondary-gold;
+
+      &:hover {
+        background: $secondary-light-gold;
+        border-color: $secondary-light-gold;
+        transform: translateY(-2px);
+        box-shadow: $shadow-md;
+      }
+    }
+
+    &--large {
+      padding: $spacing-md $spacing-xl;
+      font-size: $font-size-lg;
+    }
+  }
+</style>

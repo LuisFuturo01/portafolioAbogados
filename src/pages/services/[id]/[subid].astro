@@ -1,0 +1,474 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { services } from '@data/services';
+
+export function getStaticPaths() {
+  const paths = [];
+  
+  services.forEach((service) => {
+    service.subservices.forEach((subservice) => {
+      paths.push({
+        params: { id: service.id, subid: subservice.id },
+        props: { service, subservice },
+      });
+    });
+  });
+  
+  return paths;
+}
+
+const { service, subservice } = Astro.props;
+---
+
+<BaseLayout title={`${subservice.title} - ${service.title}`} description={subservice.description}>
+  <section class="subservice-hero">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="/services">Servicios</a>
+        <span>/</span>
+        <a href={`/services/${service.id}`}>{service.title}</a>
+        <span>/</span>
+        <span>{subservice.title}</span>
+      </nav>
+
+      <div class="subservice-hero__content">
+        <span class="subservice-hero__icon">{service.icon}</span>
+        <h1>{subservice.title}</h1>
+        <p class="subservice-hero__subtitle">{service.title}</p>
+        <p class="subservice-hero__description">{subservice.description}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="subservice-content section">
+    <div class="container">
+      <div class="content-grid">
+        <div class="content-main">
+          <!-- Details -->
+          <div class="content-block">
+            <h2>¿Qué incluye este servicio?</h2>
+            <ul class="feature-list">
+              {subservice.details.map((detail) => (
+                <li>{detail}</li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Process -->
+          <div class="content-block">
+            <h2>Nuestro Proceso</h2>
+            <div class="process-steps">
+              {subservice.process.map((step, index) => (
+                <div class="process-step">
+                  <div class="process-step__number">{index + 1}</div>
+                  <div class="process-step__content">
+                    <p>{step}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Benefits -->
+          <div class="content-block">
+            <h2>Beneficios de Nuestro Servicio</h2>
+            <div class="benefits-grid">
+              {subservice.benefits.map((benefit) => (
+                <div class="benefit-card">
+                  <span class="benefit-card__icon">✓</span>
+                  <p>{benefit}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="content-sidebar">
+          <!-- Contact Card -->
+          <div class="sidebar-card sidebar-card--primary">
+            <h3>¿Necesita este servicio?</h3>
+            <p>Contacte con nuestros especialistas</p>
+            <a href="/contact" class="btn btn--primary btn--block">Consulta Gratuita</a>
+          </div>
+
+          <!-- Related Services -->
+          <div class="sidebar-card">
+            <h3>Servicios Relacionados</h3>
+            <ul class="related-services">
+              {service.subservices
+                .filter(s => s.id !== subservice.id)
+                .slice(0, 3)
+                .map((s) => (
+                  <li>
+                    <a href={`/services/${service.id}/${s.id}`}>{s.title}</a>
+                  </li>
+                ))}
+            </ul>
+            <a href={`/services/${service.id}`} class="sidebar-link">
+              Ver todos los servicios →
+            </a>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="sidebar-card sidebar-card--dark">
+            <h3>Contacto Directo</h3>
+            <div class="contact-info">
+              <div class="contact-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span>+1 (555) 123-4567</span>
+              </div>
+              <div class="contact-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span>info@shafferlaws.com</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  @import '../../../styles/variables';
+  @import '../../../styles/mixins';
+  .subservice-hero {
+    background: linear-gradient(135deg, $primary-dark 0%, $primary-navy 100%);
+    color: $white;
+    padding: $spacing-2xl 0 $spacing-3xl;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-xl;
+    flex-wrap: wrap;
+
+    a {
+      color: rgba($white, 0.7);
+      transition: color $transition-base;
+
+      &:hover {
+        color: $secondary-gold;
+      }
+    }
+
+    span:not(:last-child) {
+      color: rgba($white, 0.5);
+    }
+
+    span:last-child {
+      color: $white;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  .subservice-hero__content {
+    max-width: 800px;
+  }
+
+  .subservice-hero__icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: $spacing-md;
+  }
+
+  .subservice-hero h1 {
+    color: $white;
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-sm;
+
+    @include md {
+      font-size: $font-size-4xl;
+    }
+  }
+
+  .subservice-hero__subtitle {
+    color: $secondary-gold;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-md;
+  }
+
+  .subservice-hero__description {
+    font-size: $font-size-lg;
+    line-height: 1.8;
+    color: rgba($white, 0.9);
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-3xl;
+
+    @include lg {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .content-main {
+    .content-block {
+      margin-bottom: $spacing-3xl;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      h2 {
+        font-size: $font-size-2xl;
+        color: $primary-dark;
+        margin-bottom: $spacing-lg;
+        padding-bottom: $spacing-sm;
+        border-bottom: 3px solid $secondary-gold;
+      }
+    }
+  }
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: $spacing-md;
+      padding-left: $spacing-xl;
+      margin-bottom: $spacing-sm;
+      background: $accent-cream;
+      border-radius: $radius-base;
+      border-left: 4px solid $secondary-gold;
+      font-size: $font-size-base;
+      color: $gray-dark;
+      line-height: 1.6;
+      position: relative;
+
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: $spacing-md;
+        color: $secondary-gold;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-lg;
+      }
+    }
+  }
+
+  .process-steps {
+    .process-step {
+      display: flex;
+      gap: $spacing-lg;
+      margin-bottom: $spacing-xl;
+      position: relative;
+
+      &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: 24px;
+        top: 60px;
+        bottom: -$spacing-xl;
+        width: 2px;
+        background: $gray-light;
+      }
+
+      &__number {
+        flex-shrink: 0;
+        width: 48px;
+        height: 48px;
+        @include flex-center;
+        background: $secondary-gold;
+        color: $primary-dark;
+        border-radius: $radius-full;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        position: relative;
+        z-index: 1;
+      }
+
+      &__content {
+        flex: 1;
+        padding-top: $spacing-sm;
+
+        p {
+          font-size: $font-size-base;
+          line-height: 1.8;
+          color: $gray-dark;
+        }
+      }
+    }
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+
+    @include sm {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .benefit-card {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-md;
+    padding: $spacing-lg;
+    background: $white;
+    border: 2px solid $gray-light;
+    border-radius: $radius-base;
+    transition: all $transition-base;
+
+    &:hover {
+      border-color: $secondary-gold;
+      box-shadow: $shadow-base;
+    }
+
+    &__icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      @include flex-center;
+      background: $secondary-gold;
+      color: $white;
+      border-radius: $radius-full;
+      font-weight: $font-weight-bold;
+    }
+
+    p {
+      flex: 1;
+      margin: 0;
+      color: $gray-dark;
+      line-height: 1.6;
+    }
+  }
+
+  .content-sidebar {
+    .sidebar-card {
+      background: $white;
+      padding: $spacing-lg;
+      border-radius: $radius-lg;
+      box-shadow: $shadow-base;
+      margin-bottom: $spacing-lg;
+
+      h3 {
+        font-size: $font-size-xl;
+        color: $primary-dark;
+        margin-bottom: $spacing-md;
+      }
+
+      p {
+        color: $gray-medium;
+        margin-bottom: $spacing-md;
+      }
+
+      &--primary {
+        background: linear-gradient(135deg, $primary-dark 0%, $primary-navy 100%);
+        color: $white;
+
+        h3, p {
+          color: $white;
+        }
+      }
+
+      &--dark {
+        background: $primary-dark;
+        color: $white;
+
+        h3 {
+          color: $secondary-gold;
+        }
+      }
+    }
+  }
+
+  .related-services {
+    list-style: none;
+    padding: 0;
+    margin-bottom: $spacing-md;
+
+    li {
+      margin-bottom: $spacing-sm;
+
+      a {
+        display: block;
+        padding: $spacing-sm;
+        color: $gray-dark;
+        border-radius: $radius-sm;
+        transition: all $transition-base;
+
+        &:hover {
+          background: $accent-cream;
+          color: $primary-dark;
+          padding-left: $spacing-md;
+        }
+      }
+    }
+  }
+
+  .sidebar-link {
+    display: inline-block;
+    color: $secondary-gold;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    transition: gap $transition-base;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .contact-info {
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-md;
+      color: rgba($white, 0.9);
+
+      svg {
+        flex-shrink: 0;
+        color: $secondary-gold;
+      }
+
+      span {
+        font-size: $font-size-sm;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .btn {
+    display: inline-block;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $radius-base;
+    font-weight: $font-weight-semibold;
+    text-align: center;
+    transition: all $transition-base;
+    text-decoration: none;
+    cursor: pointer;
+
+    &--primary {
+      background: $secondary-gold;
+      color: $primary-dark;
+
+      &:hover {
+        background: $secondary-light-gold;
+        transform: translateY(-2px);
+        box-shadow: $shadow-md;
+      }
+    }
+
+    &--block {
+      display: block;
+      width: 100%;
+    }
+  }
+</style>

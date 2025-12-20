@@ -1,0 +1,148 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import { services } from '@data/services';
+---
+
+<BaseLayout title="Servicios" description="Soluciones legales integrales en derecho civil, corporativo, laboral, penal, familiar e inmobiliario.">
+  <section class="page-hero">
+    <div class="container">
+      <h1>Nuestros Servicios</h1>
+      <p>Soluciones legales especializadas para cada una de sus necesidades</p>
+    </div>
+  </section>
+
+  <section class="services-section section">
+    <div class="container">
+      <div class="services-intro">
+        <p>
+          En Shaffer Laws ofrecemos una amplia gama de servicios legales diseñados para cubrir todas las necesidades 
+          de nuestros clientes, tanto individuos como empresas. Nuestro equipo de abogados especializados cuenta con 
+          décadas de experiencia en sus respectivas áreas de práctica.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        {services.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="services-cta section bg-cream">
+    <div class="container">
+      <div class="cta-box">
+        <h2>¿No está seguro de qué servicio necesita?</h2>
+        <p>Contáctenos y le ayudaremos a encontrar la solución legal perfecta para su caso</p>
+        <a href="/contact" class="btn btn--primary btn--large">Consulta Gratuita</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  @import '../../styles/variables';
+  @import '../../styles/mixins';
+  .page-hero {
+    background: linear-gradient(135deg, $primary-dark 0%, $primary-navy 100%);
+    color: $white;
+    padding: $spacing-3xl 0 $spacing-2xl;
+    text-align: center;
+
+    h1 {
+      color: $white;
+      font-size: $font-size-3xl;
+      margin-bottom: $spacing-md;
+
+      @include md {
+        font-size: $font-size-4xl;
+      }
+    }
+
+    p {
+      font-size: $font-size-lg;
+      color: rgba($white, 0.9);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+
+  .services-intro {
+    max-width: 800px;
+    margin: 0 auto $spacing-3xl;
+    text-align: center;
+
+    p {
+      font-size: $font-size-lg;
+      line-height: 1.8;
+      color: $gray-dark;
+    }
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+
+    @include md {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include lg {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .cta-box {
+    text-align: center;
+    background: $white;
+    padding: $spacing-3xl $spacing-xl;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-lg;
+
+    h2 {
+      color: $primary-dark;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      font-size: $font-size-lg;
+      color: $gray-medium;
+      margin-bottom: $spacing-xl;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .btn {
+    display: inline-block;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $radius-base;
+    font-weight: $font-weight-semibold;
+    text-align: center;
+    transition: all $transition-base;
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+
+    &--primary {
+      background: $secondary-gold;
+      color: $primary-dark;
+      border-color: $secondary-gold;
+
+      &:hover {
+        background: $secondary-light-gold;
+        border-color: $secondary-light-gold;
+        transform: translateY(-2px);
+        box-shadow: $shadow-md;
+      }
+    }
+
+    &--large {
+      padding: $spacing-md $spacing-xl;
+      font-size: $font-size-lg;
+    }
+  }
+</style>

@@ -1,0 +1,232 @@
+---
+---
+
+<section class="hero">
+  <div class="hero__background"></div>
+
+  <div class="hero__lines">
+    <div class="line line--thin"></div>
+    <div class="line line--thick"></div>
+  </div>
+
+  <div class="hero__container">
+    <div class="hero__text">
+      <div class="hero__brand-tag">
+        <span class="dot"></span> Abogados J-R
+      </div>
+      
+      <h1 class="hero__title">
+        <span class="serif">ABOGADOS</span>
+        <span class="sans">J-R</span>
+      </h1>
+      
+      <p class="hero__description">
+        Soluciones legales excepcionales respaldadas por experiencia. Defendemos sus derechos con dedicación y excelencia profesional.
+      </p>
+      
+      <a href="/services" class="hero__button">SERVICIOS</a>
+    </div>
+
+    <div class="hero__visual">
+      <svg viewBox="0 0 400 500" class="scales-svg">
+        <defs>
+          <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#F0D688;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#C69C3A;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        
+        <g fill="url(#goldGradient)">
+            <rect x="195" y="100" width="10" height="300" rx="2" />
+            <rect x="160" y="390" width="80" height="15" rx="2" />
+            <path d="M200 110 Q 100 110, 80 160 L 85 160 Q 105 120, 200 120 T 315 160 L 320 160 Q 300 110, 200 110" />
+            <circle cx="200" cy="90" r="10" />
+        </g>
+
+        <g class="scale-plate">
+            <line x1="82" y1="160" x2="50" y2="280" stroke="url(#goldGradient)" stroke-width="2" />
+            <line x1="82" y1="160" x2="114" y2="280" stroke="url(#goldGradient)" stroke-width="2" />
+            <path d="M 30 280 Q 82 310, 134 280 L 134 275 Q 82 305, 30 275 Z" fill="url(#goldGradient)" />
+            
+            <line x1="318" y1="160" x2="286" y2="280" stroke="url(#goldGradient)" stroke-width="2" />
+            <line x1="318" y1="160" x2="350" y2="280" stroke="url(#goldGradient)" stroke-width="2" />
+            <path d="M 266 280 Q 318 310, 370 280 L 370 275 Q 318 305, 266 275 Z" fill="url(#goldGradient)" />
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  // Usamos @import como necesitas
+  @import '../styles/variables';
+  @import '../styles/mixins';
+
+  .hero {
+    position: relative;
+    min-height: 85vh; // Altura estándar, ni muy alta ni muy baja
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: #081b2e; // Azul oscuro profundo (Navy)
+
+    // Fondo limpio con un degradado sutil
+    &__background {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 40%, #0f2d4d 0%, #051424 80%);
+      z-index: 0;
+    }
+
+    // Líneas laterales (Estáticas y limpias)
+    &__lines {
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+      
+      @include md { left: 40px; }
+
+      .line {
+        height: 100%;
+        background: linear-gradient(to bottom, #bf953f, #fcf6ba, #b38728);
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        
+        &--thin { width: 2px; opacity: 0.5; }
+        &--thick { width: 6px; }
+      }
+    }
+
+    &__container {
+      @include container;
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      gap: 3rem;
+      padding-left: 50px; // Espacio para las líneas laterales
+
+      @include lg {
+        grid-template-columns: 1fr 1fr;
+        padding-left: 80px;
+      }
+    }
+
+    &__text {
+      color: $white;
+      // Animación de entrada suave (una sola vez)
+      animation: fadeUp 1s ease-out;
+    }
+
+    &__brand-tag {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: #D4AF37; // Oro sólido
+      margin-bottom: $spacing-md;
+      font-weight: 600;
+
+      .dot {
+        width: 6px;
+        height: 6px;
+        background-color: #D4AF37;
+        border-radius: 50%;
+      }
+    }
+
+    &__title {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+      margin-bottom: $spacing-lg;
+
+      .serif {
+        font-family: 'Lora', serif;
+        font-size: 3.5rem;
+        font-weight: 400;
+        font-style: italic;
+        
+        @include lg { font-size: 5rem; }
+      }
+
+      .sans {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: 6px; // Espaciado moderado
+        color: #D4AF37; // Color sólido para mejor lectura
+        text-transform: uppercase;
+        margin-top: -5px;
+
+        @include lg { font-size: 3.5rem; }
+      }
+    }
+
+    &__description {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+      max-width: 480px;
+      margin-bottom: $spacing-xl;
+      border-left: 2px solid rgba(212, 175, 55, 0.3);
+      padding-left: 1rem;
+    }
+
+    &__button {
+      display: inline-block;
+      padding: 14px 35px;
+      background-color: transparent;
+      border: 1px solid #D4AF37;
+      color: #D4AF37;
+      font-weight: 600;
+      letter-spacing: 2px;
+      border-radius: 4px; // Bordes ligeramente redondeados (más serio)
+      text-decoration: none;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #D4AF37;
+        color: #051424;
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+      }
+    }
+
+    &__visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      // Animación de flotación suave y lenta (Breathing)
+      animation: float 6s ease-in-out infinite;
+
+      .scales-svg {
+        width: 100%;
+        max-width: 450px;
+        // Sombra suave para dar profundidad 3D sin exagerar
+        filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3));
+      }
+    }
+  }
+
+  // Animaciones CSS simples
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  @include sm {
+    .hero__lines { left: 15px; }
+    .hero__container { padding-left: 30px; }
+  }
+</style>

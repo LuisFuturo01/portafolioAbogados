@@ -1,0 +1,482 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { blogPosts } from "@data/blog";
+
+const sortedPosts = blogPosts.sort(
+  (a, b) => b.pubDate.getTime() - a.pubDate.getTime()
+);
+const categories = [...new Set(blogPosts.map((post) => post.category))];
+const featuredPost = sortedPosts.find((post) => post.featured);
+const regularPosts = sortedPosts.filter((post) => post !== featuredPost);
+---
+
+<BaseLayout
+  title="Blog Legal"
+  description="Artículos, análisis y noticias sobre derecho corporativo, civil, laboral, penal y más."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Blog Legal</h1>
+      <p>Análisis experto, noticias y consejos legales de nuestro equipo</p>
+    </div>
+  </section>
+
+  {
+    featuredPost && (
+      <section class="featured-post section">
+        <div class="container">
+          <article class="featured-article">
+            <a
+              href={`/blog/${featuredPost.id}`}
+              class="featured-article__image"
+              transition:name={`blog-image-${featuredPost.id}`}
+            >
+              <img src={featuredPost.image} alt={featuredPost.title} />
+              <span class="featured-badge">Destacado</span>
+            </a>
+            <div class="featured-article__content">
+              <div class="featured-article__meta">
+                <span class="category">{featuredPost.category}</span>
+                <span class="date">
+                  {featuredPost.pubDate.toLocaleDateString("es-ES", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+              </div>
+              <h2>
+                <a href={`/blog/${featuredPost.id}`}>{featuredPost.title}</a>
+              </h2>
+              <p>{featuredPost.description}</p>
+              <div class="featured-article__footer">
+                <div class="author-info">
+                  <img
+                    src={featuredPost.authorImage}
+                    alt={featuredPost.author}
+                  />
+                  <div>
+                    <span class="author-name">{featuredPost.author}</span>
+                    <span class="read-time">
+                      {featuredPost.readTime} min lectura
+                    </span>
+                  </div>
+                </div>
+                <a href={`/blog/${featuredPost.id}`} class="read-more">
+                  Leer más →
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="blog-section section">
+    <div class="container">
+      <div class="blog-filters">
+        <h3>Categorías</h3>
+        <div class="categories">
+          <button class="category-button active" data-category="all"
+            >Todos</button
+          >
+          {
+            categories.map((category) => (
+              <button class="category-button" data-category={category}>
+                {category}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="blog-grid">
+        {
+          regularPosts.map((post) => (
+            <article class="blog-card" data-category={post.category}>
+              <a
+                href={`/blog/${post.id}`}
+                class="blog-card__image"
+                transition:name={`blog-image-${post.id}`}
+              >
+                <img src={post.image} alt={post.title} />
+                <span class="blog-card__category">{post.category}</span>
+              </a>
+              <div class="blog-card__content">
+                <div class="blog-card__meta">
+                  <span>
+                    {post.pubDate.toLocaleDateString("es-ES", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
+                  <span>{post.readTime} min lectura</span>
+                </div>
+                <h3>
+                  <a href={`/blog/${post.id}`}>{post.title}</a>
+                </h3>
+                <p>{post.description}</p>
+                <div class="blog-card__author">
+                  <img src={post.authorImage} alt={post.author} />
+                  <span>{post.author}</span>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  @import '../../styles/variables';
+  @import '../../styles/mixins';
+  .page-hero {
+    background: linear-gradient(135deg, $primary-dark 0%, $primary-navy 100%);
+    color: $white;
+    padding: $spacing-3xl 0 $spacing-2xl;
+    text-align: center;
+
+    h1 {
+      color: $white;
+      font-size: $font-size-3xl;
+      margin-bottom: $spacing-md;
+
+      @include md {
+        font-size: $font-size-4xl;
+      }
+    }
+
+    p {
+      font-size: $font-size-lg;
+      color: rgba($white, 0.9);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+
+  .featured-article {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+    background: $white;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-xl;
+
+    @include lg {
+      grid-template-columns: 1.2fr 1fr;
+    }
+
+    &__image {
+      position: relative;
+      display: block;
+      height: 400px;
+      overflow: hidden;
+
+      @include lg {
+        height: auto;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform $transition-slow;
+      }
+
+      &:hover img {
+        transform: scale(1.05);
+      }
+
+      .featured-badge {
+        position: absolute;
+        top: $spacing-md;
+        left: $spacing-md;
+        background: $secondary-gold;
+        color: $primary-dark;
+        padding: $spacing-xs $spacing-md;
+        border-radius: $radius-base;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+      }
+    }
+
+    &__content {
+      padding: $spacing-xl;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &__meta {
+      display: flex;
+      gap: $spacing-md;
+      align-items: center;
+      margin-bottom: $spacing-md;
+
+      .category {
+        color: $secondary-gold;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-sm;
+      }
+
+      .date {
+        color: $gray-medium;
+        font-size: $font-size-sm;
+      }
+    }
+
+    h2 {
+      margin-bottom: $spacing-md;
+
+      a {
+        color: $primary-dark;
+        transition: color $transition-base;
+
+        &:hover {
+          color: $secondary-gold;
+        }
+      }
+    }
+
+    p {
+      color: $gray-dark;
+      font-size: $font-size-lg;
+      line-height: 1.8;
+      margin-bottom: $spacing-lg;
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: $spacing-md;
+      border-top: 1px solid $gray-light;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      img {
+        width: 48px;
+        height: 48px;
+        border-radius: $radius-full;
+        object-fit: cover;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .author-name {
+        font-weight: $font-weight-semibold;
+        color: $primary-dark;
+        font-size: $font-size-sm;
+      }
+
+      .read-time {
+        font-size: $font-size-xs;
+        color: $gray-medium;
+      }
+    }
+
+    .read-more {
+      color: $secondary-gold;
+      font-weight: $font-weight-semibold;
+      transition: gap $transition-base;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .blog-filters {
+    margin-bottom: $spacing-2xl;
+
+    h3 {
+      font-size: $font-size-xl;
+      color: $primary-dark;
+      margin-bottom: $spacing-md;
+    }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-sm;
+    }
+
+    .category-button {
+      padding: $spacing-xs $spacing-md;
+      background: $white;
+      color: $gray-dark;
+      border: 2px solid $gray-light;
+      border-radius: $radius-base;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      cursor: pointer;
+      transition: all $transition-base;
+
+      &:hover {
+        border-color: $secondary-gold;
+        color: $secondary-gold;
+      }
+
+      &.active {
+        background: $secondary-gold;
+        border-color: $secondary-gold;
+        color: $primary-dark;
+      }
+    }
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+
+    @include md {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include lg {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .blog-card {
+    background: $white;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-base;
+    transition: all $transition-base;
+
+    &.hidden {
+      display: none;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: $shadow-lg;
+    }
+
+    &__image {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      height: 220px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform $transition-slow;
+      }
+
+      &:hover img {
+        transform: scale(1.1);
+      }
+    }
+
+    &__category {
+      position: absolute;
+      top: $spacing-sm;
+      right: $spacing-sm;
+      background: $secondary-gold;
+      color: $primary-dark;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $radius-base;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+    }
+
+    &__content {
+      padding: $spacing-lg;
+    }
+
+    &__meta {
+      display: flex;
+      gap: $spacing-md;
+      font-size: $font-size-xs;
+      color: $gray-medium;
+      margin-bottom: $spacing-sm;
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+      }
+    }
+
+    h3 {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-sm;
+
+      a {
+        color: $primary-dark;
+        transition: color $transition-base;
+
+        &:hover {
+          color: $secondary-gold;
+        }
+      }
+    }
+
+    p {
+      color: $gray-medium;
+      font-size: $font-size-sm;
+      line-height: 1.6;
+      margin-bottom: $spacing-md;
+    }
+
+    &__author {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      img {
+        width: 32px;
+        height: 32px;
+        border-radius: $radius-full;
+        object-fit: cover;
+      }
+
+      span {
+        font-size: $font-size-sm;
+        color: $gray-dark;
+        font-weight: $font-weight-medium;
+      }
+    }
+  }
+</style>
+
+<script>
+  const categoryButtons = document.querySelectorAll(".category-button");
+  const blogCards = document.querySelectorAll(".blog-card");
+
+  categoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const category = button.dataset.category;
+
+      // Update active button
+      categoryButtons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      // Filter cards
+      blogCards.forEach((card) => {
+        if (category === "all" || card.dataset.category === category) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    });
+  });
+</script>
