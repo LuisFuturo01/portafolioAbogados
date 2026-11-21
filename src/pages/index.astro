@@ -1,9 +1,176 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import { services } from '@data/services';
+import { team } from '@data/team';
+import { blogPosts } from '@data/blog';
 
+const featuredServices = [...services].sort((a, b) => a.order - b.order).slice(0, 3);
+const featuredTeam = [...team].sort((a, b) => a.order - b.order).slice(0, 4);
+const latestPosts = [...blogPosts].sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime()).slice(0, 3);
+
+const stats = [
+  { value: '25+', label: 'Años de experiencia' },
+  { value: '1.200+', label: 'Casos resueltos' },
+  { value: '98%', label: 'Clientes satisfechos' },
+  { value: `${team.length}`, label: 'Abogados especialistas' },
+];
 ---
 
 <BaseLayout title="Shaffer Laws" description="Shaffer Laws es una firma de abogados especializada en derecho corporativo y litigios.">
-	<Hero />
+  <Hero />
+
+  <section class="home-stats">
+    <div class="container">
+      {stats.map((s) => (
+        <div class="home-stats__item">
+          <strong>{s.value}</strong>
+          <span>{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <header class="home-section__header">
+        <span class="home-section__eyebrow">Áreas de práctica</span>
+        <h2>Defendemos lo que más te importa</h2>
+        <p>Asesoría integral con especialistas en cada rama del derecho.</p>
+      </header>
+      <div class="home-grid home-grid--3">
+        {featuredServices.map((service) => <ServiceCard service={service} />)}
+      </div>
+      <div class="home-section__cta"><a href="/services" class="home-btn">Ver todos los servicios</a></div>
+    </div>
+  </section>
+
+  <section class="home-section home-section--alt">
+    <div class="container">
+      <header class="home-section__header">
+        <span class="home-section__eyebrow">Nuestro equipo</span>
+        <h2>Abogados con trayectoria</h2>
+      </header>
+      <div class="home-grid home-grid--4">
+        {featuredTeam.map((m) => (
+          <a href={`/team/${m.id}`} class="home-team">
+            <img src={m.image} alt={m.name} loading="lazy" />
+            <div>
+              <h3>{m.name}</h3>
+              <p>{m.position}</p>
+              <small>{m.specialty}</small>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <header class="home-section__header">
+        <span class="home-section__eyebrow">Blog legal</span>
+        <h2>Últimas publicaciones</h2>
+      </header>
+      <div class="home-grid home-grid--3">
+        {latestPosts.map((p) => (
+          <a href={`/blog/${p.id}`} class="home-post">
+            <img src={p.image} alt={p.title} loading="lazy" />
+            <div class="home-post__body">
+              <span>{p.category} · {p.readTime} min</span>
+              <h3>{p.title}</h3>
+              <p>{p.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="home-cta">
+    <div class="container">
+      <h2>¿Necesitas asesoría legal?</h2>
+      <p>Agenda una consulta inicial sin costo con uno de nuestros especialistas.</p>
+      <a href="/contact" class="home-btn home-btn--gold">Agendar consulta</a>
+    </div>
+  </section>
 </BaseLayout>
+
+<style lang="scss">
+  @import '../styles/variables';
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 $spacing-md; }
+
+  .home-stats {
+    background: $primary-navy;
+    color: $white;
+    .container { display: grid; grid-template-columns: repeat(4, 1fr); gap: $spacing-md; padding-top: $spacing-xl; padding-bottom: $spacing-xl; }
+    &__item { text-align: center; border-left: 1px solid rgba(255,255,255,.15); &:first-child { border-left: 0; } }
+    strong { display: block; font-family: $font-primary; font-size: $font-size-4xl; color: $secondary-gold; }
+    span { font-size: $font-size-sm; opacity: .85; }
+  }
+
+  .home-section {
+    padding: $spacing-3xl 0;
+    background: $white;
+    &--alt { background: $accent-cream; }
+    &__header { text-align: center; max-width: 640px; margin: 0 auto $spacing-2xl;
+      h2 { font-family: $font-primary; font-size: $font-size-4xl; color: $primary-dark; margin: $spacing-xs 0; }
+      p { color: $gray-medium; }
+    }
+    &__eyebrow { color: $secondary-gold; text-transform: uppercase; letter-spacing: .15em; font-size: $font-size-xs; font-weight: $font-weight-semibold; }
+    &__cta { text-align: center; margin-top: $spacing-xl; }
+  }
+
+  .home-grid { display: grid; gap: $spacing-lg;
+    &--3 { grid-template-columns: repeat(3, 1fr); }
+    &--4 { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .home-team {
+    background: $white; border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit;
+    box-shadow: 0 8px 24px rgba(10, 38, 71, .08); transition: transform .3s;
+    &:hover { transform: translateY(-6px); }
+    img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; display: block; }
+    div { padding: $spacing-md; }
+    h3 { font-family: $font-primary; color: $primary-dark; font-size: $font-size-xl; }
+    p { color: $secondary-gold; font-weight: $font-weight-semibold; font-size: $font-size-sm; }
+    small { color: $gray-medium; }
+  }
+
+  .home-post {
+    border: 1px solid $gray-light; border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; transition: box-shadow .3s;
+    &:hover { box-shadow: 0 12px 30px rgba(10, 38, 71, .12); }
+    img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+    &__body { padding: $spacing-md;
+      span { font-size: $font-size-xs; color: $secondary-gold; text-transform: uppercase; letter-spacing: .08em; }
+      h3 { font-family: $font-primary; color: $primary-dark; margin: $spacing-xs 0; font-size: $font-size-xl; }
+      p { color: $gray-medium; font-size: $font-size-sm; }
+    }
+  }
+
+  .home-cta {
+    background: linear-gradient(135deg, $primary-dark, $primary-navy); color: $white; text-align: center; padding: $spacing-3xl 0;
+    h2 { font-family: $font-primary; font-size: $font-size-4xl; }
+    p { opacity: .85; margin: $spacing-sm 0 $spacing-lg; }
+  }
+
+  .home-btn {
+    display: inline-block; padding: 14px 28px; border: 1px solid $primary-dark; color: $primary-dark; text-decoration: none;
+    letter-spacing: .1em; text-transform: uppercase; font-size: $font-size-sm; transition: .3s;
+    &:hover { background: $primary-dark; color: $white; }
+    &--gold { border-color: $secondary-gold; color: $secondary-gold; &:hover { background: $secondary-gold; color: $primary-dark; } }
+  }
+
+  @media (max-width: $breakpoint-lg) {
+    .home-grid--3, .home-grid--4 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: $breakpoint-md) {
+    .home-stats .container { grid-template-columns: repeat(2, 1fr); row-gap: $spacing-lg; }
+    .home-stats__item:nth-child(3) { border-left: 0; }
+    .home-section { padding: $spacing-2xl 0; &__header h2 { font-size: $font-size-3xl; } }
+    .home-grid--3 { grid-template-columns: 1fr; }
+    .home-cta h2 { font-size: $font-size-3xl; }
+  }
+</style>

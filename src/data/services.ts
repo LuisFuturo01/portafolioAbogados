@@ -23,7 +23,7 @@ export const services: Service[] = [
     title: 'Derecho Civil',
     description: 'Asesoramiento integral en asuntos civiles, contratos, responsabilidad civil y resolución de conflictos patrimoniales.',
     image: '/images/services/civil.jpg',
-    icon: '⚖️',
+    icon: 'lucide:scale',
     order: 1,
     subservices: [
       {
@@ -104,86 +104,181 @@ export const services: Service[] = [
     ]
   },
   {
-    id: 'derecho-corporativo',
-    title: 'Derecho Corporativo',
-    description: 'Soluciones legales para empresas, desde su constitución hasta operaciones complejas, fusiones y adquisiciones.',
-    image: '/images/services/corporate.jpg',
-    icon: '🏢',
+    id: 'derecho-penal',
+    title: 'Derecho Penal',
+    description: 'Defensa legal rigurosa en procesos penales, garantizando el debido proceso y la protección de sus derechos fundamentales.',
+    image: '/images/services/penal.jpg',
+    icon: 'lucide:shield-alert',
     order: 2,
     subservices: [
       {
-        id: 'constitucion-empresas',
-        title: 'Constitución de Empresas',
-        description: 'Asesoramiento integral en la creación y estructuración de sociedades mercantiles.',
+        id: 'defensa-penal',
+        title: 'Defensa Técnica Penal',
+        description: 'Representación legal en todas las etapas del proceso penal para imputados o acusados.',
         details: [
-          'Elección de forma societaria',
-          'Redacción de estatutos sociales',
-          'Tramitación registral',
-          'Obtención de licencias',
-          'Estructuración corporativa'
+          'Asistencia en declaraciones informativas',
+          'Audiencias de medidas cautelares',
+          'Defensa en juicio oral y público',
+          'Recursos de apelación y casación',
+          'Solicitudes de libertad irrestricta'
         ],
         process: [
-          'Consulta inicial sobre tipo de sociedad',
-          'Preparación de documentación',
-          'Trámites notariales',
-          'Inscripción en registros públicos',
-          'Acompañamiento post-constitución'
+          'Estudio minucioso del cuaderno de investigaciones',
+          'Elaboración de la teoría del caso',
+          'Recolección de pruebas de descargo',
+          'Representación en audiencias',
+          'Seguimiento hasta la sentencia o sobreseimiento'
         ],
         benefits: [
-          'Estructura legal óptima',
-          'Protección patrimonial',
-          'Optimización fiscal',
-          'Cumplimiento normativo desde el inicio'
+          'Garantía del debido proceso',
+          'Estrategia de defensa personalizada',
+          'Mitigación de penas o sanciones',
+          'Protección contra abusos procesales'
         ]
       },
       {
-        id: 'fusiones-adquisiciones',
-        title: 'Fusiones y Adquisiciones',
-        description: 'Asesoría legal en operaciones de M&A, due diligence y reestructuraciones empresariales.',
+        id: 'delitos-economicos',
+        title: 'Delitos Económicos y Financieros',
+        description: 'Asesoría especializada en delitos de "cuello blanco", estafas y legitimación de ganancias ilícitas.',
         details: [
-          'Due diligence legal',
-          'Negociación de términos',
-          'Estructuración de operaciones',
-          'Valoración de empresas',
-          'Gestión de aspectos regulatorios'
+          'Estafas y estelionatos',
+          'Apropiación indebida y abuso de confianza',
+          'Delitos societarios',
+          'Defensa en casos de corrupción',
+          'Compliance penal para empresas'
         ],
         process: [
-          'Análisis preliminar',
-          'Due diligence exhaustivo',
-          'Negociación y redacción de contratos',
-          'Obtención de autorizaciones',
-          'Cierre de la operación'
+          'Auditoría legal preventiva',
+          'Análisis forense de documentos',
+          'Presentación de querellas o defensa',
+          'Negociación de salidas alternativas',
+          'Litigio especializado'
         ],
         benefits: [
-          'Identificación de riesgos',
-          'Maximización del valor',
-          'Protección en la transacción',
-          'Ejecución eficiente'
+          'Protección del patrimonio empresarial',
+          'Prevención de responsabilidad penal corporativa',
+          'Recuperación de activos',
+          'Confidencialidad absoluta'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'derecho-familiar',
+    title: 'Derecho Familiar',
+    description: 'Trámites de divorcio, asistencia familiar y acuerdos con un enfoque humano y conciliador.',
+    image: '/images/services/familiar.jpg',
+    icon: 'lucide:heart-handshake',
+    order: 3,
+    subservices: [
+      {
+        id: 'divorcio-separacion',
+        title: 'Divorcios y Desvinculación',
+        description: 'Gestión de procesos de divorcio notarial o judicial, buscando la solución menos traumática.',
+        details: [
+          'Divorcio de mutuo acuerdo',
+          'Divorcio contencioso',
+          'Separación de bienes gananciales',
+          'Anulación de matrimonio',
+          'Acuerdos reguladores'
+        ],
+        process: [
+          'Mediación entre cónyuges',
+          'Redacción del acuerdo transaccional',
+          'Presentación de la demanda',
+          'Asistencia a audiencias familiares',
+          'Inscripción de la cancelación de partida'
+        ],
+        benefits: [
+          'Resolución rápida (en casos de mutuo acuerdo)',
+          'Protección de los intereses patrimoniales',
+          'Reducción del estrés emocional',
+          'Seguridad jurídica futura'
         ]
       },
       {
-        id: 'gobierno-corporativo',
-        title: 'Gobierno Corporativo',
-        description: 'Implementación de mejores prácticas de gobierno corporativo y compliance.',
+        id: 'asistencia-guarda',
+        title: 'Niñez y Adolescencia',
+        description: 'Protección de los derechos de los hijos: asistencia familiar, guarda y régimen de visitas.',
         details: [
-          'Diseño de estructuras de gobierno',
-          'Políticas de compliance',
-          'Códigos de ética',
-          'Protocolos familiares',
-          'Gestión de juntas y asambleas'
+          'Fijación de asistencia familiar (pensiones)',
+          'Incremento o reducción de asistencia',
+          'Guarda y custodia legal',
+          'Régimen de visitas',
+          'Autorización de viajes al exterior'
         ],
         process: [
-          'Diagnóstico de situación actual',
-          'Diseño de políticas y procedimientos',
-          'Implementación de sistemas',
-          'Capacitación a directivos',
-          'Monitoreo continuo'
+          'Cálculo de necesidades del beneficiario',
+          'Negociación extrajudicial',
+          'Proceso judicial de asistencia',
+          'Ejecución de sentencias (liquidaciones)',
+          'Apelación de medidas injustas'
         ],
         benefits: [
-          'Reducción de riesgos legales',
-          'Mejora en toma de decisiones',
-          'Transparencia corporativa',
-          'Atracción de inversores'
+          'Bienestar garantizado para los hijos',
+          'Equilibrio en las responsabilidades parentales',
+          'Cumplimiento forzoso de obligaciones',
+          'Marco legal claro para la convivencia'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'derecho-cooperativo',
+    title: 'Derecho Cooperativo',
+    description: 'Asesoría integral en la constitución, administración y resolución de conflictos internos en cooperativas.',
+    image: '/images/services/cooperativa.jpg',
+    icon: 'lucide:building-2',
+    order: 4,
+    subservices: [
+      {
+        id: 'gestion-cooperativa',
+        title: 'Constitución y Gobernanza',
+        description: 'Creación de cooperativas y actualización de estatutos según la normativa vigente (AFCOOP).',
+        details: [
+          'Trámite de Personería Jurídica',
+          'Redacción y reforma de Estatutos Orgánicos',
+          'Reglamentos internos y electorales',
+          'Asesoría a Consejos de Administración',
+          'Fusiones y disoluciones de cooperativas'
+        ],
+        process: [
+          'Asesoría en asambleas constitutivas',
+          'Elaboración de actas y documentación',
+          'Gestión ante el ente regulador',
+          'Capacitación a socios fundadores',
+          'Registro oficial'
+        ],
+        benefits: [
+          'Legalidad operativa garantizada',
+          'Estructura interna sólida',
+          'Prevención de sanciones administrativas',
+          'Funcionamiento democrático eficiente'
+        ]
+      },
+      {
+        id: 'conflictos-cooperativos',
+        title: 'Resolución de Conflictos Internos',
+        description: 'Manejo de disputas entre socios, consejos y procesos disciplinarios internos.',
+        details: [
+          'Procesos disciplinarios a socios',
+          'Impugnación de asambleas',
+          'Exclusión de asociados',
+          'Recuperación de aportaciones',
+          'Arbitraje cooperativo'
+        ],
+        process: [
+          'Análisis del reglamento de infracciones',
+          'Instauración del tribunal de honor',
+          'Mediación y conciliación interna',
+          'Defensa del debido proceso interno',
+          'Resoluciones fundamentadas'
+        ],
+        benefits: [
+          'Estabilidad institucional',
+          'Resolución imparcial de disputas',
+          'Mantenimiento de la armonía societaria',
+          'Cumplimiento de principios cooperativos'
         ]
       }
     ]
@@ -191,339 +286,119 @@ export const services: Service[] = [
   {
     id: 'derecho-laboral',
     title: 'Derecho Laboral',
-    description: 'Defensa de derechos laborales, contratos de trabajo, despidos y negociación colectiva.',
-    image: '/images/services/labor.jpg',
-    icon: '👥',
-    order: 3,
-    subservices: [
-      {
-        id: 'contratos-laborales',
-        title: 'Contratos Laborales',
-        description: 'Redacción y revisión de contratos de trabajo adaptados a las necesidades de cada empresa.',
-        details: [
-          'Contratos indefinidos y temporales',
-          'Contratos a tiempo parcial',
-          'Contratos de alta dirección',
-          'Pactos de no competencia',
-          'Acuerdos de confidencialidad'
-        ],
-        process: [
-          'Análisis de necesidades',
-          'Redacción del contrato',
-          'Revisión de cláusulas especiales',
-          'Firma y registro',
-          'Seguimiento del cumplimiento'
-        ],
-        benefits: [
-          'Cumplimiento de normativa laboral',
-          'Protección de intereses empresariales',
-          'Claridad en condiciones laborales',
-          'Prevención de conflictos'
-        ]
-      },
-      {
-        id: 'despidos-finiquitos',
-        title: 'Despidos y Finiquitos',
-        description: 'Asesoramiento en terminación de relaciones laborales y cálculo de indemnizaciones.',
-        details: [
-          'Despidos procedentes',
-          'Despidos improcedentes',
-          'Despidos disciplinarios',
-          'Cálculo de finiquitos',
-          'Negociación de salidas'
-        ],
-        process: [
-          'Evaluación de causas del despido',
-          'Preparación de documentación',
-          'Notificación al trabajador',
-          'Cálculo de indemnizaciones',
-          'Defensa en caso de impugnación'
-        ],
-        benefits: [
-          'Minimización de riesgos legales',
-          'Cálculos exactos de indemnizaciones',
-          'Procedimientos correctos',
-          'Defensa sólida ante demandas'
-        ]
-      },
-      {
-        id: 'conflictos-laborales',
-        title: 'Conflictos Laborales',
-        description: 'Representación en juicios laborales y mediación en conflictos entre empleados y empleadores.',
-        details: [
-          'Demandas por despido',
-          'Reclamaciones de cantidad',
-          'Acoso laboral',
-          'Accidentes de trabajo',
-          'Conflictos colectivos'
-        ],
-        process: [
-          'Análisis del caso',
-          'Intento de conciliación',
-          'Preparación de demanda o defensa',
-          'Representación en juicio',
-          'Recursos si son necesarios'
-        ],
-        benefits: [
-          'Defensa experta de derechos',
-          'Maximización de compensaciones',
-          'Reducción de costos en litigios',
-          'Soluciones rápidas y efectivas'
-        ]
-      }
-    ]
-  },
-  {
-    id: 'derecho-penal',
-    title: 'Derecho Penal',
-    description: 'Defensa penal integral en todo tipo de procedimientos, desde delitos menores hasta casos complejos.',
-    image: '/images/services/criminal.jpg',
-    icon: '🛡️',
-    order: 4,
-    subservices: [
-      {
-        id: 'defensa-penal',
-        title: 'Defensa Penal',
-        description: 'Representación legal en procesos penales garantizando los derechos del acusado.',
-        details: [
-          'Delitos contra el patrimonio',
-          'Delitos económicos',
-          'Delitos contra las personas',
-          'Delitos de tráfico',
-          'Defensa en todas las instancias'
-        ],
-        process: [
-          'Entrevista inicial con el cliente',
-          'Análisis de pruebas',
-          'Estrategia de defensa',
-          'Representación en juicio',
-          'Recursos de apelación'
-        ],
-        benefits: [
-          'Protección de derechos fundamentales',
-          'Defensa técnica especializada',
-          'Búsqueda de mejores resultados',
-          'Acompañamiento en todo el proceso'
-        ]
-      },
-      {
-        id: 'victimas-delito',
-        title: 'Víctimas de Delito',
-        description: 'Asesoramiento y representación de víctimas en procesos penales.',
-        details: [
-          'Denuncia y querella',
-          'Acción civil en proceso penal',
-          'Reclamación de indemnizaciones',
-          'Orden de alejamiento',
-          'Protección de testigos'
-        ],
-        process: [
-          'Presentación de denuncia',
-          'Personación en el proceso',
-          'Aportación de pruebas',
-          'Ejercicio de acción civil',
-          'Obtención de indemnización'
-        ],
-        benefits: [
-          'Reparación del daño',
-          'Justicia para la víctima',
-          'Protección durante el proceso',
-          'Compensación económica'
-        ]
-      },
-      {
-        id: 'derecho-penal-economico',
-        title: 'Derecho Penal Económico',
-        description: 'Defensa especializada en delitos económicos y compliance penal.',
-        details: [
-          'Fraude y estafa',
-          'Delitos societarios',
-          'Blanqueo de capitales',
-          'Delitos fiscales',
-          'Insolvencia punible'
-        ],
-        process: [
-          'Análisis de documentación financiera',
-          'Defensa técnica especializada',
-          'Peritos económicos',
-          'Negociación con Fiscalía',
-          'Defensa en juicio'
-        ],
-        benefits: [
-          'Defensa técnica compleja',
-          'Reducción de penas',
-          'Protección patrimonial',
-          'Soluciones alternativas'
-        ]
-      }
-    ]
-  },
-  {
-    id: 'derecho-familiar',
-    title: 'Derecho de Familia',
-    description: 'Asesoramiento en divorcios, custodia de menores, pensiones alimenticias y derecho sucesorio.',
-    image: '/images/services/family.jpg',
-    icon: '👨‍👩‍👧‍👦',
+    description: 'Resolución de conflictos laborales y protección de derechos tanto para empleadores como para trabajadores.',
+    image: '/images/services/laboral.jpg',
+    icon: 'lucide:briefcase',
     order: 5,
     subservices: [
       {
-        id: 'divorcios-separaciones',
-        title: 'Divorcios y Separaciones',
-        description: 'Gestión integral de procesos de divorcio, tanto de mutuo acuerdo como contenciosos.',
+        id: 'asesoria-empresarial',
+        title: 'Asesoría Empresarial Laboral',
+        description: 'Gestión preventiva de recursos humanos y defensa ante el Ministerio de Trabajo.',
         details: [
-          'Divorcio de mutuo acuerdo',
-          'Divorcio contencioso',
-          'Separaciones',
-          'Liquidación de régimen económico',
-          'Acuerdos prematrimoniales'
+          'Redacción de contratos de trabajo',
+          'Visado de contratos y planillas',
+          'Reglamentos internos de trabajo',
+          'Procesos de reestructuración',
+          'Defensa ante inspecciones laborales'
         ],
         process: [
-          'Consulta inicial',
-          'Negociación de acuerdos',
-          'Redacción de convenio',
-          'Tramitación judicial',
-          'Ejecución de sentencia'
+          'Auditoría laboral de la empresa',
+          'Regularización de documentación',
+          'Implementación de normas de seguridad',
+          'Atención a citaciones administrativas',
+          'Negociación colectiva'
         ],
         benefits: [
-          'Protección de intereses',
-          'Reducción de conflictos',
-          'Procesos más rápidos',
-          'Acuerdos equilibrados'
+          'Evita multas y sanciones',
+          'Relaciones laborales claras',
+          'Optimización de costos laborales',
+          'Seguridad jurídica en contrataciones'
         ]
       },
       {
-        id: 'custodia-menores',
-        title: 'Custodia de Menores',
-        description: 'Defensa del interés superior del menor en procedimientos de custodia y régimen de visitas.',
+        id: 'litigio-laboral',
+        title: 'Litigio y Reclamaciones',
+        description: 'Defensa en procesos de despidos, beneficios sociales y reincorporaciones.',
         details: [
-          'Custodia compartida',
-          'Custodia exclusiva',
-          'Régimen de visitas',
-          'Modificación de medidas',
-          'Traslados de residencia'
+          'Cálculo y pago de beneficios sociales',
+          'Demanda de reincorporación laboral',
+          'Acoso laboral y discriminación',
+          'Accidentes de trabajo',
+          'Juicios laborales'
         ],
         process: [
-          'Análisis de la situación familiar',
-          'Propuesta de régimen de custodia',
-          'Defensa en juicio',
-          'Informe psicosocial',
+          'Conciliación en el Ministerio de Trabajo',
+          'Liquidación de finiquitos',
+          'Presentación de demanda judicial',
+          'Prueba y audiencias',
           'Ejecución de sentencia'
         ],
         benefits: [
-          'Protección del menor',
-          'Acuerdos justos para los padres',
-          'Estabilidad familiar',
-          'Defensa del interés del menor'
-        ]
-      },
-      {
-        id: 'pensiones',
-        title: 'Pensiones Alimenticias',
-        description: 'Cálculo, modificación y ejecución de pensiones alimenticias y compensatorias.',
-        details: [
-          'Pensiones de alimentos',
-          'Pensiones compensatorias',
-          'Modificación de pensiones',
-          'Reclamación de impagos',
-          'Extinción de pensiones'
-        ],
-        process: [
-          'Cálculo de la pensión',
-          'Negociación o litigio',
-          'Establecimiento judicial',
-          'Modificación por cambio de circunstancias',
-          'Ejecución forzosa si hay impago'
-        ],
-        benefits: [
-          'Pensiones justas y proporcionadas',
-          'Protección económica',
-          'Actualización según necesidades',
-          'Garantía de cumplimiento'
+          'Pago justo de beneficios',
+          'Respeto a la estabilidad laboral',
+          'Compensación por daños',
+          'Resolución efectiva del conflicto'
         ]
       }
     ]
   },
   {
-    id: 'derecho-inmobiliario',
-    title: 'Derecho Inmobiliario',
-    description: 'Asesoramiento legal en compraventa, arrendamientos, hipotecas y propiedad horizontal.',
-    image: '/images/services/real-estate.jpg',
-    icon: '🏠',
+    id: 'derecho-minero',
+    title: 'Derecho Minero',
+    description: 'Asesoría especializada en la cadena productiva minera, permisos, regulaciones y medio ambiente.',
+    image: '/images/services/mineria.jpg',
+    icon: 'lucide:pickaxe',
     order: 6,
     subservices: [
       {
-        id: 'compraventa',
-        title: 'Compraventa de Inmuebles',
-        description: 'Asesoramiento integral en operaciones de compraventa de bienes inmuebles.',
+        id: 'contratos-mineros',
+        title: 'Contratos y Concesiones',
+        description: 'Gestión de derechos mineros y adecuación a la normativa estatal (AJAM).',
         details: [
-          'Due diligence inmobiliaria',
-          'Contratos de arras',
-          'Escrituras de compraventa',
-          'Gestión de cargas y gravámenes',
-          'Tramitación registral'
+          'Contratos Administrativos Mineros (CAM)',
+          'Adecuaciones de derechos preconstituidos',
+          'Contratos de riesgo compartido',
+          'Transferencias y arrendamientos',
+          'Pago de patentes mineras'
         ],
         process: [
-          'Revisión de documentación',
-          'Negociación de condiciones',
-          'Redacción de contratos',
-          'Firma ante notario',
-          'Inscripción en registro'
+          'Solicitud de área minera',
+          'Consulta previa con comunidades',
+          'Firma de contrato con el Estado',
+          'Registro minero',
+          'Informes de cumplimiento'
         ],
         benefits: [
-          'Compra segura',
-          'Identificación de riesgos',
-          'Protección de inversión',
-          'Tranquilidad jurídica'
+          'Seguridad jurídica sobre la cuadrícula',
+          'Derecho legal a la explotación',
+          'Cumplimiento con el Estado',
+          'Protección de la inversión'
         ]
       },
       {
-        id: 'arrendamientos',
-        title: 'Arrendamientos',
-        description: 'Gestión de contratos de alquiler, desahucios y conflictos arrendaticios.',
+        id: 'ambiental-social',
+        title: 'Cumplimiento Ambiental y Social',
+        description: 'Gestión de licencias ambientales y relaciones con comunidades locales.',
         details: [
-          'Contratos de alquiler de vivienda',
-          'Contratos de local comercial',
-          'Desahucios',
-          'Actualización de rentas',
-          'Resolución de contratos'
+          'Licencias Ambientales',
+          'Manifiestos ambientales',
+          'Acuerdos con comunidades',
+          'Responsabilidad Social Empresarial',
+          'Defensa ante sanciones ambientales'
         ],
         process: [
-          'Redacción del contrato',
-          'Negociación de cláusulas',
-          'Firma y depósito de fianza',
-          'Gestión de incidencias',
-          'Procedimientos de desahucio si es necesario'
+          'Evaluación de impacto ambiental',
+          'Trámites ante autoridades competentes',
+          'Negociación de compensaciones comunales',
+          'Auditorías ambientales',
+          'Planes de cierre de mina'
         ],
         benefits: [
-          'Contratos adaptados a la LAU',
-          'Protección de derechos',
-          'Prevención de conflictos',
-          'Solución rápida de problemas'
-        ]
-      },
-      {
-        id: 'propiedad-horizontal',
-        title: 'Propiedad Horizontal',
-        description: 'Asesoramiento en comunidades de propietarios y conflictos vecinales.',
-        details: [
-          'Gestión de comunidades',
-          'Modificación de estatutos',
-          'Reclamación de cuotas',
-          'Conflictos entre vecinos',
-          'Obras en elementos comunes'
-        ],
-        process: [
-          'Análisis de estatutos',
-          'Asesoramiento a la comunidad',
-          'Gestión de conflictos',
-          'Representación en juntas',
-          'Procedimientos judiciales'
-        ],
-        benefits: [
-          'Convivencia pacífica',
-          'Cumplimiento de normativa',
-          'Protección de intereses comunes',
-          'Resolución efectiva de conflictos'
+          'Operación sostenible',
+          'Evita paralización de actividades',
+          'Buenas relaciones comunitarias',
+          'Certificaciones de cumplimiento'
         ]
       }
     ]

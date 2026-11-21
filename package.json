@@ -9,12 +9,16 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.0.0",
+    "@iconify-json/lucide": "^1.2.82",
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/ph": "^1.2.2",
     "astro": "^5.16.6",
-    "@astrojs/sitemap": "^3.0.0"
+    "astro-icon": "^1.2.0"
   },
   "devDependencies": {
-    "sass": "^1.69.5",
     "@astrojs/check": "^0.3.1",
+    "sass": "^1.69.5",
     "typescript": "^5.3.3"
   }
 }

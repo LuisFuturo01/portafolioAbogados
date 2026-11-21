@@ -1,5 +1,6 @@
 ---
 import type { Service } from '@data/services';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
   service: Service;
@@ -13,7 +14,7 @@ const { service } = Astro.props;
     <div class="service-card__image" transition:name={`service-image-${service.id}`}>
       <img src={service.image} alt={service.title} />
       <div class="service-card__overlay">
-        <span class="service-card__icon">{service.icon}</span>
+        <Icon name={service.icon} size="48" />
       </div>
     </div>
     
